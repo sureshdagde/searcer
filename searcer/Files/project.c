@@ -9,6 +9,8 @@
 #include"ShowDir.h"
 #include"UseDB.h"
 #include"ShowCollection.h"
+#include"CheckCollection.h"
+#include"RemoveCollection.h"
 #include"help.h"
 int CreateTable(char [][233],int,char []);
 void Insert(char cmdword[][233],int j)
@@ -90,7 +92,7 @@ int main()
 				}
 			
 			}
-		else if(!strcmp(cmdword[0],"create") && cmdword[1]!=NULL && !strcmp(cmdword[1],"c"))
+		else if(!strcmp(cmdword[0],"create")  && !strcmp(cmdword[1],"c"))
 			{
 				if(!strcmp(mount,"unmount"))
 				{
@@ -101,7 +103,24 @@ int main()
 				CreateTable(cmdword,j,mount);
 				}
 			}
-		
+		else if(!strcmp(cmdword[0],"rm") && !strcmp(cmdword[1],"c"))
+			{
+				if(!strcmp(mount,"unmount"))
+				{
+					printf("please mount database first");
+				}
+				else
+				{
+					if(CheckCollection(mount,cmdword[2]))
+					{
+						RemoveCollection(mount,cmdword[2]);
+					}
+					else
+					{
+						printf("collection not found");
+					}
+				}
+			}
 		else if(!strcmp(cmdword[0],"exit"))
 			{
 				
