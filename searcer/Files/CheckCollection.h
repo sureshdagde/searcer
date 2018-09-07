@@ -12,7 +12,7 @@ int CheckCollection(char Db[],char collection[])
 		return 0;
 	}
 	strcat(collection,".txt");
-	printf("%s",collection);
+	
 	while((de = readdir(dr))!=NULL)
 	{
 		if(de->d_type==DT_DIR)//read onlyfolder;

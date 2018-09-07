@@ -14,6 +14,7 @@ char dir[500]="/home/suresh/Desktop/searcer/Database/";
 		else
 		{
 			printf("The Database Of Name -> %s <- is Not Exist",DBName);
+			printf("\nprior Database is unmounted\n");
 			return 0;
 		}
 		

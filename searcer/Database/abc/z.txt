@@ -1,0 +1,8 @@
+0
+3
+number	name	salary	
+131	suresh	500	
+	suresh	500	
+	suresh	500	
+	suresh	500	
+131	suresh	500	

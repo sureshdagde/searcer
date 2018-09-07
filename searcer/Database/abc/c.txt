@@ -1,0 +1,4 @@
+0
+3
+number	name	salary	
+131ber	suresh	500ary	

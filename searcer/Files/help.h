@@ -1,5 +1,6 @@
-help()
+void help()
 {
+	printf("space must be not allowed after the command\nmust be only one space is allowed between the command \n");
 	printf("1)ceate db Database_Name                  -->\t used to create the database (must be not duplicate)\n");
 	printf("2)show dbs                                -->\t used to show the all list of database\n");
 	printf("3)use db Database_Name                    -->\t used to mount(select) the database\n");
