@@ -160,37 +160,45 @@ struct attribute insert2(char Db[],char collection[],char cmdword[],FILE *fp)
 
 struct attribute CheckSequence(struct attribute CollectionAttribute,struct attribute CollectionAttributeValue,FILE *fp,int NewNumOfatt)
 {
-	int i=0,j=0;
+	int i=0,j=0,k=0;
+	int l;
 	int AttNumber;
 	AttNumber=find(fp);
 	struct attribute root,final;
 	root=RootAttribute(fp);
 	
-	while(i<AttNumber)
-	{
-		printf("------------------------------->%s",CollectionAttribute.a[i]);
-		i++;
-	}
-	i=0;
+	//printf("\n--------check same -%d-%d-\n",NewNumOfatt,AttNumber);
 	if(NewNumOfatt>=AttNumber)
 	{
 		while(i<AttNumber)
 		{
+			l=0;
 			while(j<AttNumber)
 			{
-				
+
+				//printf("-----------i is%d\t",i);
 				if(!strcmp(root.a[i],CollectionAttribute.a[j]))//if same
 				{
-					printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
+					//printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
 							strcpy(final.a[i],CollectionAttributeValue.a[j]);//or root.a[i];both are same
-						printf("------->%s\t",final.a[i]);
-						j=j+AttNumber;
+					//	printf("------->%s\t",final.a[i]);
+						//j=j+AttNumber;
 				}
 				else
 				{
-					printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
-					printf("...%d...",strcmp(root.a[i],CollectionAttribute.a[j]));
-					printf("%s-->%s--\n",root.a[i],CollectionAttribute.a[j]);
+					
+					
+					if(i==0 && l<1)
+							{
+								k=0;
+							while(root.a[0][k]!='\0')
+							{
+								root.a[0][k]=root.a[i][k+1];
+								k++;
+							}
+						j=j-1;
+						}
+						l++;
 				}
 
 				j++;
@@ -199,38 +207,58 @@ struct attribute CheckSequence(struct attribute CollectionAttribute,struct attri
 			i++;
 		}
 	}
-	else
+	else									
 	{
-		while(i<NewNumOfatt)
+//root 	number name salary       f number   i 4 0       1
+//c a     number name salary                  j 4 0 1 2 3 0
+
+	while(i<NewNumOfatt)
 		{
 			while(j<NewNumOfatt)
 			{
+				printf("-----------i is%d\t",i);
 				
 				if(!strcmp(root.a[i],CollectionAttribute.a[j]))//if same
 				{
-					printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
+					//printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
 							strcpy(final.a[i],CollectionAttributeValue.a[j]);//or root.a[i];both are same
-						printf("------->%s\t",final.a[i]);
-						j=j+NewNumOfatt;
+					//printf("------->%s\t",final.a[i]);
+						//j=j+AttNumber;
+						
 				}
 				else
 				{
-					printf("...%d...",strcmp(root.a[i],CollectionAttribute.a[j]));
-					printf("%s-->%s--\n",root.a[i],CollectionAttribute.a[j]);
+					if(i==0)
+						{
+							k=0;
+						while(root.a[0][k]!='\0')
+						{
+							root.a[0][k]=root.a[i][k+1];
+							k++;
+						}
+						j=j-1;
+						}
 				}
+				
 
 				j++;
 			}
 			j=0;
 			i++;
 		}
-	}	i=0;	
+
+	}	
+
+	i=0;	
 	//printf("\nppppppppppppppppp\n");
 	//printf("%s\t",final.a[0]);
 	//printf("%s\t",final.a[1]);
 //	printf("%s\t",final.a[2]);
 //	printf("\n");
-	
+	printf("start---------\n");
+	printf("%s\n",final.a[0]);
+	printf("%s\n",final.a[1]);
+	printf("%s\n",final.a[2]);
 return final;
 
 }
@@ -248,7 +276,7 @@ struct attribute RootAttribute(FILE *fp)
 	
 		while(i<position)
 		{
-			while((c=fgetc(fp))!='\t')
+			while((c=fgetc(fp))!='\t' && c!=' ')
 			{	
 				if(c!=' ' || c!='\t' || c!='\n')
 				p.a[i][j]=c;
@@ -389,4 +417,40 @@ int find(FILE *fp)
 		 		 		{
 		 		 			printf("invlaid command");
 		 		 		}
+		
+else
+				{
+					k=0;
+					while(root.a[i][k]!='\0')
+					{
+						root.a[i][k]=root.a[i][k+1];
+						k++;
+					}
+					printf("\n%s------is %d length --->%s--->%d\n",CollectionAttribute.a[j],strlen(CollectionAttribute.a[j]),root.a[i],strlen(root.a[i]));
+							if(!strcmp(root.a[i],CollectionAttribute.a[j]))//if same
+						{
+							//printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
+									strcpy(final.a[i],CollectionAttributeValue.a[j]);//or root.a[i];both are same
+							//	printf("------->%s\t",final.a[i]);
+								//j=j+AttNumber;
+						}
+		//			printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
+		//			printf("...%d...",strcmp(root.a[i],CollectionAttribute.a[j]));
+		//			printf("%s-->%s--\n",root.a[i],CollectionAttribute.a[j]);
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		*/

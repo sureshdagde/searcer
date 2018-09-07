@@ -1,0 +1,6 @@
+0
+3
+number	name	add	
+400	suresh	pune	
+300	ramesh	latur	
+300	pawar	nanded	

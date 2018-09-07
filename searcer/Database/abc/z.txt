@@ -1,4 +1,9 @@
 0
-9
-number	name	salary	number	name	salary	number	name	salary	
-131	suresh	500}{number131	suresh	500}//		{number131	suresh	500	name	salary	
+3
+number	name	add	
+10	sachin	mumbai	
+15	suresh	pune	
+20	pravin	punecity	
+25	dipak	latur	
+44	ravi	nanded	
+33	rahul	satara	

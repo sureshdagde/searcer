@@ -1,0 +1,7 @@
+0
+3
+number	name	add	
+300	suresh	pune	
+400	pravin	mumbai	
+1	diak	hadapsar	
+2	lalasaheb	satara	

@@ -21,6 +21,7 @@
 #include "help.h"
 #include "NextPre.h"
 #include "insert.h"
+#include "SelectAll.h"
 int CreateTable(char [][233],int,char []);
 void Insert(char cmdword[][233],int CommandWordLength)
 {
@@ -115,7 +116,29 @@ int main()
 					printf("invalid command   [space is not allowed]or[Empty data]");
 				}
 			}
-
+			else if(!strcmp(cmdword[0],"select") && !strcmp(cmdword[2],"*"))
+			{
+				if(connect)
+				{
+					if(!strcmp(mount,"unmount"))
+					{
+						printf("please mount database first");
+					}
+					else if(CheckCollection(mount,cmdword[1]))
+					{
+					SelectAll(mount,cmdword[1]);
+					}
+					else
+					{
+						printf("collection not found");
+					//CreateTable(cmdword,CommandWordLength,mount);
+					}
+				}
+				else
+				{
+					printf("connection not establised");
+				}
+			}
 
 
 

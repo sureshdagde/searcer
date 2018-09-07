@@ -1,0 +1,7 @@
+0
+3
+name	add	number	
+suresh	pune	50	
+ramesh	latur	400	
+ramesh	satara	300	
+ramesh	solapur	200	
