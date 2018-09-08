@@ -15,6 +15,7 @@ int RemoveCollectionAll(char DB[])
         remove(filepath);
     }
     closedir(theFolder);
+    printf("Removed Successfully\n");
     return 0;
 }
 

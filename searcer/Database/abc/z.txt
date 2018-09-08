@@ -1,9 +1,8 @@
-0
-3
-number	name	add	
-10	sachin	mumbai	
-15	suresh	pune	
-20	pravin	punecity	
-25	dipak	latur	
-44	ravi	nanded	
-33	rahul	satara	
+
+0	
+43	a	b	c	d
+	
+a	b	c	
+t	y	e	
+g	r	t	
+f	r	i	s	

@@ -43,10 +43,7 @@ insert(char Db[],char collection[],char cmdword[])
 			fprintf(fp,"%d\n",position);
 			//PUTS ATTRIBUTE INTO FILE
 			while(i<position)
-			{		
-
-					//fprintf(fp,"%s","\t");
-
+			{
 					fprintf(fp,"%s\t",CollectionAttribute.a[i]);
 					i++;
 			}
@@ -55,8 +52,6 @@ insert(char Db[],char collection[],char cmdword[])
 			i=0;//imp
 			while(i<position)
 			{
-				    //fprintf(fp,"%s","\t");
-
 					fprintf(fp,"%s\t",CollectionAttributeValue.a[i]);
 					i++;
 			}
@@ -79,7 +74,6 @@ insert(char Db[],char collection[],char cmdword[])
 				i=0;
 				while(i<position)
 				{
-						//fprintf(fp,"%s","\t");
 						fprintf(fp,"%s\t",final.a[i]);
 						printf("\n------%s\n",final.a[i]);
 				i++;
@@ -176,23 +170,17 @@ struct attribute insert2(char Db[],char collection[],char cmdword[],FILE *fp)
 
 struct attribute CheckSequence(struct attribute CollectionAttribute,struct attribute CollectionAttributeValue,FILE *fp,int NewNumOfatt,char dir[])
 {
-	
-	int  i=0,j=0,k=0;
+	int i=0,j=0,k=0;
 	int l,found=0;
 	int AttNumber;
 	AttNumber=find(fp);
 	struct attribute root,final;
-	root=RootAttribute(fp);
+
 	
-	printf("root->%s----collection--->%s\n",root.a[0],CollectionAttribute.a[0]);
-	printf("root->%s----collection--->%s\n",root.a[1],CollectionAttribute.a[1]);
-	printf("root->%s----collection--->%s\n",root.a[2],CollectionAttribute.a[2]);
-	printf("root->%s----collection--->%s\n",root.a[3],CollectionAttribute.a[3]);
-	printf("NewNumOfatt-->%d--AttNumber--->%d\n",NewNumOfatt,AttNumber);
 	//printf("\n--------check same -%d-%d-\n",NewNumOfatt,AttNumber);
 	if(NewNumOfatt<=AttNumber)
 	{
-		printf("if start---------");
+		root=RootAttribute(fp);
 		while(i<AttNumber)
 		{
 			l=0;
@@ -233,131 +221,158 @@ struct attribute CheckSequence(struct attribute CollectionAttribute,struct attri
 	}
 	else									
 	{
-				printf("else start---------");
-			found=0;
-			i=0;
-			j=0;
-			k=0;
+	found=0;
+	i=0;
+	j=0;
+	k=0;
+
+	int newatt=0
+	char c;
+	char line[233];
+	FILE *fp2;
+	fp2=fopen("/home/suresh/Desktop/searcer/Database/temp.txt","w+");
+	int at=find(fp);
+	rewind(fp);
+	while(i<3+at-1)
+	{
+		fscanf(fp,"%s[^\n]",line);
+		if(i==1)
+		{
+			newatt=atoi(line);
+			fprintf(fp2, "%d\t",newatt+(NewNumOfatt-AttNumber));
+		}
+		else
+		{
+		fprintf(fp2, "%s\t",line);
+		}
+		
+		if(i<2)
+			fprintf(fp2, "%s","\n");
+		i++;
+	}
+	i=0;
+	while(i<NewNumOfatt-at)
+	{
+	fprintf(fp2, "%s",CollectionAttribute.a[at+i]);
+	i++;
+	}
+	fprintf(fp2, "%s","\n");
+	while((c=fgetc(fp))!=EOF)
+	{
+		fputc(c,fp2);
+
+	}
+	rewind(fp2);
+	fp=fopen(dir,"w+");
+	while((c=fgetc(fp2))!=EOF)
+	{
+		fputc(c,fp);
+	}
+fclose(fp2);
+fclose(fp);
+fp=fopen(dir,"a+");
+root=RootAttribute(fp);
+	i=0;
 
 
-			char c;
-			char line[233];
-			FILE *fp2;
-			fp2=fopen("/home/suresh/Desktop/searcer/Database/temp.txt","w+");
-			int at=find(fp);
-			rewind(fp);
-			while(i<3+at-1)
+printf("else;;;;;;;;;");
+printf("--->%s",root.a[0]);
+printf("--->%s",root.a[1]);
+printf("--->%s",root.a[2]);
+printf("--->%s",root.a[3]);
+
+
+
+
+
+
+
+
+
+
+
+/*
+//root 	number name salary       f number   i 4 0       1
+//c a     number name salary                  j 4 0 1 2 3 0
+printf("else--aaaaaaaaaaaaaaaaaasfsfff\n");
+int addat;
+addat=AddNew(fp);
+//find difference between root and new attriute;
+
+printf("fseek j is-->%d\n",addat);
+printf(" AttNumber is-->%d\n",AttNumber);
+printf(" NewNumOfatt is-->%d\n",NewNumOfatt);
+
+i=NewNumOfatt-AttNumber;
+printf(" defference is-->%d\n",i);
+
+j=0;
+fseek(fp,3,0);
+fseek(fp,addat,1);
+fprintf(fp,"%s","\t");
+while(i>0)
+{
+fprintf(fp, "%s\t", CollectionAttribute.a[AttNumber+j]);
+i--;
+j++;
+}
+*/
+
+AttNumber=find(fp);
+
+
+i=0;
+j=0;
+k=0;
+	while(i<NewNumOfatt)
+	{
+		l=0;
+		while(j<NewNumOfatt)
+		{
+
+			//printf("-----------i is%d\t",i);
+			if(!strcmp(root.a[i],CollectionAttribute.a[j]))//if same
 			{
-				fscanf(fp,"%s[^\n]",line);
+				//printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
+						strcpy(final.a[i],CollectionAttributeValue.a[j]);//or root.a[i];both are same
+						found++;
+				//	printf("------->%s\t",final.a[i]);
+					//j=j+AttNumber;
+			}
+			else
+			{
 				
-				if(i==1)
-					fprintf(fp2, "%d\n",atoi(line)+(NewNumOfatt-atoi(line)));
-				//printf("%d",)
-				else if(i<2)
-				{
-					fprintf(fp2, "%s",line);
-					fprintf(fp2, "%s","\n");
-					
-				}
-				else
-				{
-				fprintf(fp2, "%s\t",line);
-				}
-				i++;
-			}
-			i=0;
-			while(i<NewNumOfatt-at)
-			{
-			fprintf(fp2, "%s",CollectionAttribute.a[at+i]);
-			i++;
-			}
-			//---fprintf(fp2, "%s","\n");
-			while((c=fgetc(fp))!=EOF)
-			{
-				fputc(c,fp2);
-
-			}
-			rewind(fp2);
-			fp=fopen(dir,"w+");
-			while((c=fgetc(fp2))!=EOF)
-			{
-				fputc(c,fp);
-			}
-		fclose(fp2);
-		fclose(fp);
-		fp=fopen(dir,"a+");
-			i=0;
-
-
-				i=0;
-				j=0;
-				k=0;
-					while(i<NewNumOfatt)
-					{
-						l=0;
-						while(j<NewNumOfatt)
+				
+				if(i==0 && l<1)
 						{
-
-							//printf("-----------i is%d\t",i);
-							if(!strcmp(root.a[i],CollectionAttribute.a[j]))//if same
-							{
-								//printf("j is %d and value is-->%s\n",j,CollectionAttributeValue.a[i]);
-										strcpy(final.a[i],CollectionAttributeValue.a[j]);//or root.a[i];both are same
-										found++;
-								//	printf("------->%s\t",final.a[i]);
-									//j=j+AttNumber;
-							}
-							else
-							{
-								
-								
-								if(i==0 && l<1)
-										{
-											k=0;
-										while(root.a[0][k]!='\0')
-										{
-											root.a[0][k]=root.a[i][k+1];
-											k++;
-										}
-									j=j-1;
-									}
-									l++;
-							}
-
-							j++;
+							k=0;
+						while(root.a[0][k]!='\0')
+						{
+							root.a[0][k]=root.a[i][k+1];
+							k++;
 						}
-						j=0;
-						i++;
+					j=j-1;
 					}
-					}
+					l++;
+			}
+
+			j++;
+		}
+		j=0;
+		i++;
+	}
+	}
 
 
-				i=0;
-				while(i<NewNumOfatt-AttNumber) 
-						{
-							strcpy(final.a[NewNumOfatt-1],CollectionAttributeValue.a[NewNumOfatt-1]);
-							NewNumOfatt++;
-							AttNumber++;
-							found++;
-						i++;
-					 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+i=0;
+while(i<NewNumOfatt-AttNumber) 
+		{
+			strcpy(final.a[NewNumOfatt-1],CollectionAttributeValue.a[NewNumOfatt-1]);
+			NewNumOfatt++;
+			AttNumber++;
+			found++;
+		i++;
+	 	}
 
 
 
@@ -402,7 +417,7 @@ struct attribute RootAttribute(FILE *fp)
 	
 	rewind(fp);
 	fseek(fp,3,0);
-	
+		fgetc(fp);
 		while(i<position)
 		{
 			while((c=fgetc(fp))!='\t' && c!=' ')
@@ -587,32 +602,6 @@ else
 
 
 
-/*
-//root 	number name salary       f number   i 4 0       1
-//c a     number name salary                  j 4 0 1 2 3 0
-printf("else--aaaaaaaaaaaaaaaaaasfsfff\n");
-int addat;
-addat=AddNew(fp);
-//find difference between root and new attriute;
-
-printf("fseek j is-->%d\n",addat);
-printf(" AttNumber is-->%d\n",AttNumber);
-printf(" NewNumOfatt is-->%d\n",NewNumOfatt);
-
-i=NewNumOfatt-AttNumber;
-printf(" defference is-->%d\n",i);
-
-j=0;
-fseek(fp,3,0);
-fseek(fp,addat,1);
-fprintf(fp,"%s","\t");
-while(i>0)
-{
-fprintf(fp, "%s\t", CollectionAttribute.a[AttNumber+j]);
-i--;
-j++;
-}
-*/
 
 
 
@@ -623,6 +612,4 @@ j++;
 
 
 
-
-
-		
+		*/
