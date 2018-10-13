@@ -12,7 +12,7 @@ struct attribute insert1(char [],char [],char [],FILE *fp,int*);
 struct attribute RootAttribute(FILE *fp);
 struct attribute CheckSequence(struct attribute,struct attribute,FILE *fp,int,char[]);
 
-insert(char Db[],char collection[],char cmdword[])
+void insert(char Db[],char collection[],char cmdword[])
 {
 	int position;
 	int i=0,j=0;
@@ -35,7 +35,7 @@ insert(char Db[],char collection[],char cmdword[])
 	else
 	{
 		c=fgetc(fp);
-		printf("%d\n",c);
+		//printf("%d\n",c);
 		if(c!=48)
 		{
 			fprintf(fp,"%d\n",0);
@@ -50,6 +50,7 @@ insert(char Db[],char collection[],char cmdword[])
 					fprintf(fp,"%s\t",CollectionAttribute.a[i]);
 					i++;
 			}
+			fprintf(fp, "%s",";" );
 			fprintf(fp,"%s","\n");
 			CollectionAttributeValue=insert2(Db,collection,cmdword,fp);
 			i=0;//imp
@@ -60,7 +61,9 @@ insert(char Db[],char collection[],char cmdword[])
 					fprintf(fp,"%s\t",CollectionAttributeValue.a[i]);
 					i++;
 			}
-			
+			printf("%s collection is created\n",collection);
+			printf("Record inserted successfully");
+			fprintf(fp, "%s",";" );
 		}
 		else
 		{
@@ -72,7 +75,7 @@ insert(char Db[],char collection[],char cmdword[])
 			final=CheckSequence(CollectionAttribute,CollectionAttributeValue,fp,position,dir);//position is the numbert of attribute in the newquery not same as find();
 			
 			//PUTS THE VALUE INTO FILE;
-			if(final.a[0][0]!='a')//if invalid attriute
+			if(final.a[0][0]!='z')//if invalid attriute
 			{
 					fprintf(fp,"%s","\n");
 			
@@ -81,15 +84,16 @@ insert(char Db[],char collection[],char cmdword[])
 				{
 						//fprintf(fp,"%s","\t");
 						fprintf(fp,"%s\t",final.a[i]);
-						printf("\n------%s\n",final.a[i]);
+						//printf("\n------%s\n",final.a[i]);
 				i++;
 				}
+				fprintf(fp, "%s",";" );
 			}
 			else
 			{
 				printf("invalid attribute");
 			}
-		
+		printf("Record inserted successfully");
 		}
 	}
 	fclose(fp);
@@ -101,7 +105,7 @@ struct attribute insert1(char Db[],char collection[],char cmdword[],FILE *fp,int
 			struct attribute str;
 			//printf("ddddddddddd");
 //		{number:131,name:suresh,salary:500}
-//{number:131,name:[f:suresh,l:daagde],name:[f:suresh,l:daagde],salary:500,name:[f:suresh,l:daagde]}
+//{number:131,name:[f:suresh,l:daagde],salary:500}
 
 			//fprintf(fprintfp,"%s","\n");
 			
@@ -164,12 +168,13 @@ struct attribute insert2(char Db[],char collection[],char cmdword[],FILE *fp)
 			 i++;
 			}
 		//	printf("kkkkkkkkkkkkkkkkk");
-			i=0;
+			/*i=0;
 			while(i<j)
 			{
-			    printf("value is ------%s\n",str.a[i]);
+			  //  printf("value is ------%s\n",str.a[i]);
 				i++;
 			}
+*/
 
 			return str;
 }
@@ -184,15 +189,15 @@ struct attribute CheckSequence(struct attribute CollectionAttribute,struct attri
 	struct attribute root,final;
 	root=RootAttribute(fp);
 	
-	printf("root->%s----collection--->%s\n",root.a[0],CollectionAttribute.a[0]);
+	/*printf("root->%s----collection--->%s\n",root.a[0],CollectionAttribute.a[0]);
 	printf("root->%s----collection--->%s\n",root.a[1],CollectionAttribute.a[1]);
 	printf("root->%s----collection--->%s\n",root.a[2],CollectionAttribute.a[2]);
 	printf("root->%s----collection--->%s\n",root.a[3],CollectionAttribute.a[3]);
-	printf("NewNumOfatt-->%d--AttNumber--->%d\n",NewNumOfatt,AttNumber);
+	printf("NewNumOfatt-->%d--AttNumber--->%d\n",NewNumOfatt,AttNumber);*/
 	//printf("\n--------check same -%d-%d-\n",NewNumOfatt,AttNumber);
 	if(NewNumOfatt<=AttNumber)
 	{
-		printf("if start---------");
+		//printf("if start---------");
 		while(i<AttNumber)
 		{
 			l=0;
@@ -233,7 +238,7 @@ struct attribute CheckSequence(struct attribute CollectionAttribute,struct attri
 	}
 	else									
 	{
-				printf("else start---------");
+			//	printf("else start---------");
 			found=0;
 			i=0;
 			j=0;
@@ -373,20 +378,20 @@ j=0;k=0;
 	//printf("%s\t",final.a[1]);
 //	printf("%s\t",final.a[2]);
 //	printf("\n");
-	printf("start---------\n");
+/*	printf("start---------\n");
 	printf("%s\n",final.a[0]);
 	printf("%s\n",final.a[1]);
 
 	printf("%s\n",final.a[2]);
 	printf("%s\n",final.a[3]);
-	printf("found-->%d\n",found);
+	printf("found-->%d\n",found);*/
 if(found==AttNumber)
 {
 return final;
 }
 else
 {
-	final.a[0][0]='a';
+	final.a[0][0]='z';
 	
 	return final;
 }
@@ -427,8 +432,8 @@ int find(FILE *fp)
 	char s[10];
 	char d;
 	fseek(fp,0,0);
-	fscanf(fp,"%s",&s);
-	fscanf(fp,"%s",&s);
+	fscanf(fp,"%s",s);
+	fscanf(fp,"%s",s);
 	//printf("---%s---",s);
 	position=atoi(s);
 
@@ -437,7 +442,7 @@ int find(FILE *fp)
 }
 
 
-AddNew(FILE *fp)
+int AddNew(FILE *fp)
 {
 	int j=0;
 	rewind(fp);

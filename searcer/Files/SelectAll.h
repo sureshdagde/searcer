@@ -17,11 +17,12 @@ int SelectAll(char Db[],char collection[])
    else
    {
    	fseek(fp,0,0);
-	fscanf(fp,"%s",&s);
-	fscanf(fp,"%s",&s);
+	fscanf(fp,"%s",s);
+	fscanf(fp,"%s",s);
    	//printf("%s",file_name);
 	   	while((c=getc(fp))!=EOF)
 	   	{
+        if(c!=';')
 	   		printf("%c",c);
 	   	}
     }

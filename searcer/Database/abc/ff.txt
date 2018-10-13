@@ -1,9 +1,0 @@
-0
-4
-a	b	c	d	
-f	t	u	
-g	t	h	
-f	t	j	h	
-g	t	h	r	
-f	w	z	l	
-g	t	p	z	

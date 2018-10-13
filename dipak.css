@@ -1,0 +1,42 @@
+
+ body
+{
+       background-image:url("file:///home/suresh/3ty/miss%20match/2017-01-05-16-54-09-006.jpg");
+   }
+ h1
+ {
+      font-size:50px;
+      color:red;
+      list-style:italic;
+  }
+  h2
+ {
+       font-size:43px;
+       color:blue;
+       list-style:armenian;
+  }
+  p1
+ {
+       font-size:40px;
+       color:green;
+       list-style: georgian;
+ }
+ p2
+{
+         font-size:25px;
+         color:orange;
+         font-style:georgian;
+ }
+ p3
+{
+         font-size:30px;
+         color:yellow;
+       list-style:georgian;
+ }
+p4
+{
+       font-size:60px;
+        color:yellow;
+          list-style:upper-latin;
+}
+ 

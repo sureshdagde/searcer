@@ -1,6 +1,0 @@
-0
-3
-a	b	c	
-a	b	c	
-	d		s		t	
-	d		t		u	

@@ -1,8 +1,0 @@
-
-0	
-43	a	b	c	d
-	
-a	b	c	
-t	y	e	
-g	r	t	
-f	r	i	s	
